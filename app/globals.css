@@ -3,11 +3,30 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* Colores de la maqueta - sitio de autor/libros */
+  --brand-hero: #990000;
+  --brand-header: #DF4233;
+  --brand-peach: #FEE8D6;
+  --brand-section-alt: #EFA079;
+  --brand-toast: #E08E4F;
+  --brand-yellow: #FFD700;
+  --brand-cta: #EEB555;
+  --brand-cta-dark: #254040;
+  --brand-red: #FF0000;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-brand-hero: var(--brand-hero);
+  --color-brand-header: var(--brand-header);
+  --color-brand-peach: var(--brand-peach);
+  --color-brand-section-alt: var(--brand-section-alt);
+  --color-brand-toast: var(--brand-toast);
+  --color-brand-yellow: var(--brand-yellow);
+  --color-brand-cta: var(--brand-cta);
+  --color-brand-cta-dark: var(--brand-cta-dark);
+  --color-brand-red: var(--brand-red);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
