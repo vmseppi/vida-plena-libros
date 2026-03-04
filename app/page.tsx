@@ -9,20 +9,28 @@ export default function Home() {
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
             <div className="flex flex-col gap-4 lg:max-w-xl">
               <h1 className="font-script text-4xl font-normal tracking-tight md:text-5xl lg:text-6xl">
-                Aviok Novelist
+                Yoga vida plena libros
               </h1>
               <p className="font-serif-body text-lg text-white/95 md:text-xl">
-                Chour the potadute fiort cute whmmendat
+                Descubre los manuales y la guía de meditación Raja Yoga para
+                llevar la práctica a tu día a día.
               </p>
               <Link
-                href="/sobre-la-autora"
+                href="/ebooks"
                 className="inline-flex w-fit rounded-lg bg-brand-cta px-6 py-3 text-base font-semibold text-gray-900 transition hover:opacity-95"
               >
                SABER MÁS
               </Link>
             </div>
             <div className="flex shrink-0 justify-center lg:justify-end">
-              <div className="h-64 w-48 rounded-lg border-2 border-white/30 bg-white/10 md:h-80 md:w-56 lg:h-96 lg:w-64" />
+              <div className="h-64 w-48 overflow-hidden rounded-lg border-2 border-white/30 shadow-lg md:h-80 md:w-56 lg:h-96 lg:w-64">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/libros/guia_de_meditacion_raja_yoga.png"
+                  alt="Guía de Meditación Raja Yoga - Claudia Peresson"
+                  className="h-full w-full object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -60,7 +68,7 @@ export default function Home() {
                   alt: "Portada Manual de Yoga en una Vida Plena Tomo I - Claudia Peresson",
                 },
                 {
-                  src: "/images/libros/tu-mancia-tu-sadhana.jpg",
+                  src: "/images/libros/mancia_tapa.png",
                   title: "Tu mancia tu sadhana",
                   alt: "Portada Tu mancia tu sadhana - Claudia Peresson",
                 },

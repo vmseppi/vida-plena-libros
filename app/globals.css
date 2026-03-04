@@ -58,3 +58,35 @@ body {
 .font-script {
   font-family: var(--font-script), cursive;
 }
+
+/* Grid tipo masonry: columnas CSS para efecto Pinterest */
+.masonry-clases {
+  column-count: 2;
+  column-gap: 0.75rem;
+}
+@media (min-width: 768px) {
+  .masonry-clases {
+    column-gap: 1rem;
+  }
+}
+@media (min-width: 1024px) {
+  .masonry-clases {
+    column-count: 3;
+    column-gap: 1.25rem;
+  }
+}
+.masonry-clases-item {
+  break-inside: avoid;
+  margin-bottom: 0.75rem;
+}
+@media (min-width: 768px) {
+  .masonry-clases-item {
+    margin-bottom: 1rem;
+  }
+}
+.masonry-clases-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  vertical-align: bottom;
+}

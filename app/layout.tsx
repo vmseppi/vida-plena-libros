@@ -33,7 +33,7 @@ const greatVibes = Great_Vibes({
 });
 
 export const metadata: Metadata = {
-  title: "Vida Plena Libros",
+  title: "Yoga Vida Plena Libros",
   description: "Ebooks, sobre la autora y clases de yoga",
 };
 
