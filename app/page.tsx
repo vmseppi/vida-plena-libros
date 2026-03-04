@@ -24,7 +24,6 @@ export default function Home() {
             </div>
             <div className="flex shrink-0 justify-center lg:justify-end">
               <div className="h-64 w-48 overflow-hidden rounded-lg border-2 border-white/30 shadow-lg md:h-80 md:w-56 lg:h-96 lg:w-64">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/images/libros/guia_de_meditacion_raja_yoga.png"
                   alt="Guía de Meditación Raja Yoga - Claudia Peresson"
@@ -84,7 +83,6 @@ export default function Home() {
                   className="group flex flex-col overflow-hidden rounded-lg border-2 border-gray-300/50 bg-white/50 shadow-sm transition hover:border-gray-400/60 hover:shadow-md"
                 >
                   <div className="aspect-[3/4] overflow-hidden bg-gray-100">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={libro.src}
                       alt={libro.alt}
@@ -107,7 +105,6 @@ export default function Home() {
           <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
             <div className="order-2 lg:order-1 lg:flex-1">
               <div className="max-w-sm overflow-hidden rounded-lg border-2 border-gray-700/30 [&_img]:block [&_img]:w-full [&_img]:h-auto">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/images/autora/taj-majal.jpg"
                   alt="Claudia Peresson - Vida Plena"

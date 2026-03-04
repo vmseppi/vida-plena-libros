@@ -7,7 +7,6 @@ export default function SobreLaAutoraPage() {
         </h1>
         <div className="mt-8 flex flex-col gap-8 sm:flex-row sm:items-start">
           <div className="shrink-0 overflow-hidden rounded-lg border-2 border-gray-300/50 bg-white/50 w-full max-w-[280px] sm:w-80 sm:max-w-none md:w-96">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/autora/vida_plena_india.jpg"
               alt="Claudia Peresson - Autora"

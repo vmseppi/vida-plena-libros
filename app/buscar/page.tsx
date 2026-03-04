@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect, useCallback } from "react";
 import { search, type SearchResult } from "@/lib/search-data";
 
-export default function BuscarPage() {
+function BuscarContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const q = searchParams.get("q") ?? "";
@@ -109,5 +110,24 @@ export default function BuscarPage() {
         </section>
       </div>
     </main>
+  );
+}
+
+export default function BuscarPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen bg-brand-peach">
+          <div className="mx-auto max-w-2xl px-4 py-8 md:px-6 md:py-12">
+            <h1 className="font-serif-heading text-2xl font-bold text-gray-900 md:text-3xl">
+              Buscar
+            </h1>
+            <p className="mt-4 font-serif-body text-gray-600">Cargando…</p>
+          </div>
+        </main>
+      }
+    >
+      <BuscarContent />
+    </Suspense>
   );
 }
