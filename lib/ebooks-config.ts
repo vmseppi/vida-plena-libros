@@ -103,6 +103,7 @@ export const PRODUCTS: ProductItem[] = [
     price: 0.01,
     digital: true,
     coverSrc: "/images/libros/guia_de_meditacion_raja_yoga.png",
+    pdfFile: "prueba-produccion.pdf",
   },
 ];
 

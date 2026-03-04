@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { addOrder, type OrderItem, type SavedOrder } from "@/lib/orders";
+import { sendOrderEmail } from "@/lib/send-order-email";
 
 const MP_ACCESS_TOKEN =
   process.env.MP_ACCESS_TOKEN ?? process.env.MPACCESS_TOKEN;
@@ -97,6 +98,15 @@ export async function POST(request: NextRequest) {
     };
 
     await addOrder(order);
+
+    const emailResult = await sendOrderEmail(
+      order.payer_email,
+      order.items,
+      order.payment_id
+    );
+    if (!emailResult.ok) {
+      // La orden ya está guardada; el email se puede reenviar después si hace falta
+    }
 
     return NextResponse.json({ ok: true, payment_id: order.payment_id });
   } catch {
