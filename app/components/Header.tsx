@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Search, User, ShoppingCart } from "lucide-react";
+import { useCart } from "@/lib/cart-context";
 
 const NAV_LINKS = [
   { href: "/ebooks", label: "Ebooks" },
@@ -19,6 +20,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const { data: session, status } = useSession();
+  const { totalCount } = useCart();
 
   return (
     <header className="sticky top-0 z-50 w-full bg-brand-header text-white">
@@ -109,10 +111,16 @@ export default function Header() {
           </div>
           <Link
             href="/carrito"
-            className="flex items-center gap-2 rounded bg-brand-cta px-3 py-1.5 text-sm font-semibold text-gray-900 transition hover:opacity-95"
+            className="relative flex items-center gap-2 rounded bg-brand-cta px-3 py-1.5 text-sm font-semibold text-gray-900 transition hover:opacity-95"
+            aria-label={totalCount > 0 ? `Carrito con ${totalCount} productos` : "Carrito"}
           >
             <ShoppingCart className="h-4 w-4" strokeWidth={2} />
-            <span className="hidden sm:inline">ADD ITEM</span>
+            <span className="hidden sm:inline">Carrito</span>
+            {totalCount > 0 && (
+              <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-brand-red text-xs font-bold text-white">
+                {totalCount > 99 ? "99+" : totalCount}
+              </span>
+            )}
           </Link>
         </nav>
 
@@ -120,10 +128,15 @@ export default function Header() {
         <div className="flex items-center gap-2 md:hidden">
           <Link
             href="/carrito"
-            className="rounded p-2 hover:bg-white/10"
-            aria-label="Carrito"
+            className="relative rounded p-2 hover:bg-white/10"
+            aria-label={totalCount > 0 ? `Carrito con ${totalCount} productos` : "Carrito"}
           >
             <ShoppingCart className="h-5 w-5" />
+            {totalCount > 0 && (
+              <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-brand-red text-[10px] font-bold text-white">
+                {totalCount > 99 ? "99+" : totalCount}
+              </span>
+            )}
           </Link>
           <button
             type="button"

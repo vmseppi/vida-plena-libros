@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProductById, formatPrice, PRODUCTS } from "@/lib/ebooks-config";
+import AddToCartButton from "@/app/components/AddToCartButton";
 
 export function generateStaticParams() {
   return PRODUCTS.map((p) => ({ id: p.id }));
@@ -74,13 +75,10 @@ export default async function EbookDetailPage({ params }: PageProps) {
                 )}
               </p>
               {product.digital ? (
-                <button
-                  type="button"
-                  className="w-fit rounded-lg bg-brand-red px-6 py-3 text-base font-semibold text-white transition hover:opacity-95"
-                  aria-label={`Añadir ${product.title} al carrito`}
-                >
-                  Añadir al carrito
-                </button>
+                <AddToCartButton
+                  productId={product.id}
+                  label="Añadir al carrito"
+                />
               ) : (
                 <Link
                   href="/carrito?envio=mancia"
