@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { Search, User, ShoppingCart } from "lucide-react";
 
 const NAV_LINKS = [
@@ -16,6 +17,8 @@ const NAV_LINKS = [
 export default function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const { data: session, status } = useSession();
 
   return (
     <header className="sticky top-0 z-50 w-full bg-brand-header text-white">
@@ -44,13 +47,66 @@ export default function Header() {
           >
             <Search className="h-5 w-5" strokeWidth={2} />
           </Link>
-          <button
-            type="button"
-            className="rounded p-1.5 hover:bg-white/10"
-            aria-label="Usuario"
-          >
-            <User className="h-5 w-5" strokeWidth={2} />
-          </button>
+          <div className="relative">
+            {status === "loading" ? (
+              <span className="rounded p-1.5 opacity-70">
+                <User className="h-5 w-5" strokeWidth={2} />
+              </span>
+            ) : session ? (
+              <>
+                <button
+                  type="button"
+                  onClick={() => setUserMenuOpen(!userMenuOpen)}
+                  className="flex items-center gap-1.5 rounded p-1.5 hover:bg-white/10"
+                  aria-label="Menú cuenta"
+                  aria-expanded={userMenuOpen}
+                >
+                  <User className="h-5 w-5" strokeWidth={2} />
+                  <span className="max-w-[120px] truncate text-sm md:max-w-[140px]">
+                    {session.user?.email}
+                  </span>
+                </button>
+                {userMenuOpen && (
+                  <>
+                    <div
+                      className="fixed inset-0 z-40"
+                      aria-hidden
+                      onClick={() => setUserMenuOpen(false)}
+                    />
+                    <div className="absolute right-0 top-full z-50 mt-1 w-48 rounded-lg border border-white/20 bg-brand-header py-1 shadow-lg">
+                      <Link
+                        href="/mis-compras"
+                        onClick={() => setUserMenuOpen(false)}
+                        className="block px-3 py-2 text-sm hover:bg-white/10"
+                      >
+                        Mis compras y recibos
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setUserMenuOpen(false);
+                          signOut();
+                        }}
+                        className="block w-full px-3 py-2 text-left text-sm hover:bg-white/10"
+                      >
+                        Cerrar sesión
+                      </button>
+                    </div>
+                  </>
+                )}
+              </>
+            ) : (
+              <button
+                type="button"
+                onClick={() => signIn("google")}
+                className="flex items-center gap-1.5 rounded p-1.5 hover:bg-white/10"
+                aria-label="Entrar con Google"
+              >
+                <User className="h-5 w-5" strokeWidth={2} />
+                <span className="hidden text-sm sm:inline">Entrar</span>
+              </button>
+            )}
+          </div>
           <Link
             href="/carrito"
             className="flex items-center gap-2 rounded bg-brand-cta px-3 py-1.5 text-sm font-semibold text-gray-900 transition hover:opacity-95"
@@ -118,12 +174,38 @@ export default function Header() {
             >
               <Search className="h-4 w-4" /> Buscar
             </Link>
-            <button
-              type="button"
-              className="flex flex-1 items-center justify-center gap-2 rounded bg-white/10 py-2 text-sm"
-            >
-              <User className="h-4 w-4" /> Cuenta
-            </button>
+            {session ? (
+              <>
+                <Link
+                  href="/mis-compras"
+                  onClick={() => setMenuOpen(false)}
+                  className="flex flex-1 items-center justify-center gap-2 rounded bg-white/10 py-2 text-sm"
+                >
+                  <User className="h-4 w-4" /> Mis compras
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMenuOpen(false);
+                    signOut();
+                  }}
+                  className="flex flex-1 items-center justify-center gap-2 rounded bg-white/10 py-2 text-sm"
+                >
+                  Cerrar sesión
+                </button>
+              </>
+            ) : (
+              <button
+                type="button"
+                onClick={() => {
+                  setMenuOpen(false);
+                  signIn("google");
+                }}
+                className="flex flex-1 items-center justify-center gap-2 rounded bg-white/10 py-2 text-sm"
+              >
+                <User className="h-4 w-4" /> Entrar con Google
+              </button>
+            )}
           </div>
         </nav>
       </div>
