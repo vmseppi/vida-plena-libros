@@ -105,10 +105,14 @@ export async function POST(request: NextRequest) {
       order.payment_id
     );
     if (!emailResult.ok) {
-      // La orden ya está guardada; el email se puede reenviar después si hace falta
+      console.error("[orders/record] Email no enviado:", emailResult.error);
     }
 
-    return NextResponse.json({ ok: true, payment_id: order.payment_id });
+    return NextResponse.json({
+      ok: true,
+      payment_id: order.payment_id,
+      email_sent: emailResult.ok,
+    });
   } catch {
     return NextResponse.json(
       { error: "Error al registrar la compra." },
