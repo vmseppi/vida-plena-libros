@@ -1,12 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
+import { useSession } from "next-auth/react";
 import { useCart } from "@/lib/cart-context";
 import { getProductById, formatPrice } from "@/lib/ebooks-config";
 import { Trash2 } from "lucide-react";
 
 function CarritoContent() {
   const { items, removeItem, updateQuantity, totalCount } = useCart();
+  const { data: session } = useSession();
+  const [payLoading, setPayLoading] = useState(false);
+  const [payError, setPayError] = useState<string | null>(null);
 
   if (totalCount === 0) {
     return (
@@ -118,8 +123,13 @@ function CarritoContent() {
             Total: ${formatPrice(total)}
           </p>
           <p className="mt-1 text-sm text-gray-600">
-            El pago se procesará con Mercado Pago (próximamente).
+            Serás redirigido a Mercado Pago para completar el pago.
           </p>
+          {payError && (
+            <p className="mt-2 text-sm text-red-600" role="alert">
+              {payError}
+            </p>
+          )}
           <div className="mt-4 flex flex-wrap gap-3">
             <Link
               href="/ebooks"
@@ -129,11 +139,38 @@ function CarritoContent() {
             </Link>
             <button
               type="button"
-              disabled
-              className="cursor-not-allowed rounded-lg bg-gray-400 px-4 py-2 font-serif-body text-sm font-semibold text-white"
-              title="Próximamente: checkout con Mercado Pago"
+              disabled={payLoading}
+              onClick={async () => {
+                setPayError(null);
+                setPayLoading(true);
+                try {
+                  const res = await fetch("/api/checkout/preference", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                      items: items.map(({ id, quantity }) => ({ id, quantity })),
+                      email: session?.user?.email ?? undefined,
+                    }),
+                  });
+                  const data = await res.json();
+                  if (!res.ok) {
+                    setPayError(data?.error ?? "Error al iniciar el pago.");
+                    return;
+                  }
+                  if (data.init_point) {
+                    window.location.href = data.init_point;
+                    return;
+                  }
+                  setPayError("No se recibió la URL de pago.");
+                } catch {
+                  setPayError("Error de conexión. Intentá de nuevo.");
+                } finally {
+                  setPayLoading(false);
+                }
+              }}
+              className="rounded-lg bg-brand-red px-4 py-2 font-serif-body text-sm font-semibold text-white transition hover:opacity-95 disabled:opacity-70"
             >
-              Ir a pagar
+              {payLoading ? "Redirigiendo…" : "Ir a pagar"}
             </button>
           </div>
         </div>
