@@ -132,7 +132,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         <div
           role="status"
           aria-live="polite"
-          className="fixed bottom-6 left-1/2 z-[100] -translate-x-1/2 rounded-lg bg-gray-900 px-4 py-3 font-serif-body text-sm font-medium text-white shadow-lg transition-opacity duration-300"
+          className="fixed bottom-8 left-1/2 z-[100] -translate-x-1/2 rounded-xl border-2 border-brand-cta/80 bg-brand-cta-dark px-6 py-4 font-serif-body text-lg font-semibold text-brand-peach shadow-xl transition-opacity duration-300"
         >
           {toastMessage}
         </div>
