@@ -19,17 +19,17 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full bg-brand-header text-white">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-6">
-        <Link href="/" className="text-lg font-semibold tracking-wide md:text-xl">
-          VIDA PLENA LIBROS
+        <Link href="/" className="font-script text-4xl font-normal tracking-tight md:text-5xl lg:text-6xl">
+          vida plena libros
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden items-center gap-6 md:flex ">
           {NAV_LINKS.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
-              className={`text-sm font-medium transition hover:opacity-90 ${
+              className={`font-serif-body text-sm font-medium transition hover:opacity-90  ${
                 pathname === href ? "underline underline-offset-4" : ""
               }`}
             >
@@ -102,7 +102,7 @@ export default function Header() {
               key={href}
               href={href}
               onClick={() => setMenuOpen(false)}
-              className={`rounded px-3 py-2.5 text-sm font-medium hover:bg-white/10 ${
+              className={`font-serif-body rounded px-3 py-2.5 text-sm font-medium hover:bg-white/10 ${
                 pathname === href ? "bg-white/15" : ""
               }`}
             >
