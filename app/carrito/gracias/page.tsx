@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import { useCart } from "@/lib/cart-context";
 
 function GraciasContent() {
@@ -12,12 +12,28 @@ function GraciasContent() {
     searchParams.get("status") ?? searchParams.get("collection_status");
   const paymentId = searchParams.get("payment_id");
   const { clearCart } = useCart();
+  const recordedRef = useRef(false);
 
   useEffect(() => {
     if (status === "approved") {
       clearCart();
     }
   }, [status, clearCart]);
+
+  useEffect(() => {
+    if (
+      status === "approved" &&
+      paymentId &&
+      !recordedRef.current
+    ) {
+      recordedRef.current = true;
+      fetch("/api/orders/record", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ payment_id: paymentId }),
+      }).catch(() => {});
+    }
+  }, [status, paymentId]);
 
   const isApproved = status === "approved";
   const isPending = status === "pending";

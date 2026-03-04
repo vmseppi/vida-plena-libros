@@ -6,11 +6,13 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import type { EbookId } from "./ebooks-config";
 
 const CART_STORAGE_KEY = "vidaplena-cart";
+const TOAST_DURATION_MS = 2000;
 
 export interface CartItem {
   id: EbookId;
@@ -24,6 +26,7 @@ interface CartContextValue {
   updateQuantity: (id: EbookId, quantity: number) => void;
   totalCount: number;
   clearCart: () => void;
+  toastMessage: string | null;
 }
 
 const CartContext = createContext<CartContextValue | null>(null);
@@ -52,6 +55,8 @@ function saveCart(items: CartItem[]) {
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [mounted, setMounted] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const toastTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     setItems(loadCart());
@@ -61,6 +66,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (mounted) saveCart(items);
   }, [items, mounted]);
+
+  useEffect(() => {
+    return () => {
+      if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current);
+    };
+  }, []);
 
   const addItem = useCallback((id: EbookId, quantity = 1) => {
     setItems((prev) => {
@@ -72,6 +83,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       }
       return [...prev, { id, quantity }];
     });
+    if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current);
+    setToastMessage("¡Agregado al carrito!");
+    toastTimeoutRef.current = setTimeout(() => {
+      setToastMessage(null);
+      toastTimeoutRef.current = null;
+    }, TOAST_DURATION_MS);
   }, []);
 
   const removeItem = useCallback((id: EbookId) => {
@@ -103,12 +120,24 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       updateQuantity,
       totalCount,
       clearCart,
+      toastMessage,
     }),
-    [items, addItem, removeItem, updateQuantity, totalCount, clearCart]
+    [items, addItem, removeItem, updateQuantity, totalCount, clearCart, toastMessage]
   );
 
   return (
-    <CartContext.Provider value={value}>{children}</CartContext.Provider>
+    <CartContext.Provider value={value}>
+      {children}
+      {toastMessage && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="fixed bottom-6 left-1/2 z-[100] -translate-x-1/2 rounded-lg bg-gray-900 px-4 py-3 font-serif-body text-sm font-medium text-white shadow-lg transition-opacity duration-300"
+        >
+          {toastMessage}
+        </div>
+      )}
+    </CartContext.Provider>
   );
 }
 
