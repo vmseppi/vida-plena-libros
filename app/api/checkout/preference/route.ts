@@ -116,8 +116,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Preferir sandbox_init_point si existe (modo prueba); en producción MP devuelve solo init_point
-    const initPoint = data.sandbox_init_point ?? data.init_point;
+    // Producción (HTTPS): siempre init_point (checkout en vivo). Local (HTTP): sandbox para tarjetas de prueba
+    const initPoint = useHttps ? data.init_point : (data.sandbox_init_point ?? data.init_point);
     if (!initPoint) {
       return NextResponse.json(
         { error: "Mercado Pago no devolvió la URL de pago." },
