@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import { addOrder, type OrderItem, type SavedOrder } from "@/lib/orders";
 import { sendOrderEmail } from "@/lib/send-order-email";
 
@@ -32,6 +34,9 @@ export async function POST(request: NextRequest) {
   }
 
   try {
+    const session = await getServerSession(authOptions);
+    const loggedInEmail = session?.user?.email ?? null;
+
     const res = await fetch(
       `https://api.mercadopago.com/v1/payments/${paymentId}`,
       {
@@ -97,10 +102,14 @@ export async function POST(request: NextRequest) {
       status: payment.status ?? "approved",
     };
 
-    await addOrder(order);
+    // Si hay sesión, la orden y el correo van al usuario logueado; si no, al email del pago (MP).
+    const emailTo = loggedInEmail ?? payerEmail;
+    await addOrder(order, {
+      storeUnderEmail: loggedInEmail ?? undefined,
+    });
 
     const emailResult = await sendOrderEmail(
-      order.payer_email,
+      emailTo,
       order.items,
       order.payment_id
     );

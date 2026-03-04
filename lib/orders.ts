@@ -32,8 +32,16 @@ export async function getOrdersByEmail(email: string): Promise<SavedOrder[]> {
   );
 }
 
-export async function addOrder(order: SavedOrder): Promise<void> {
-  const key = `${ORDERS_KEY_PREFIX}${order.payer_email}`;
+/**
+ * Guarda la orden. Si `storeUnderEmail` se indica (ej. usuario logueado), la orden
+ * queda asociada a ese email (aparece en "Mis compras" de ese usuario). Si no, se usa payer_email.
+ */
+export async function addOrder(
+  order: SavedOrder,
+  options?: { storeUnderEmail?: string }
+): Promise<void> {
+  const email = options?.storeUnderEmail ?? order.payer_email;
+  const key = `${ORDERS_KEY_PREFIX}${email}`;
   const list = (await kv.get<SavedOrder[]>(key)) ?? [];
   if (list.some((o) => o.payment_id === order.payment_id)) return;
   await kv.set(key, [...list, order]);

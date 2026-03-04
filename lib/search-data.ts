@@ -5,6 +5,7 @@ export const SEARCH_PAGES = [
   { title: "Ebooks", href: "/ebooks" },
   { title: "Sobre la autora", href: "/sobre-la-autora" },
   { title: "Clases de yoga", href: "/clases-yoga" },
+  { title: "Instructorado de yoga", href: "/instructorado-yoga" },
   { title: "Carrito", href: "/carrito" },
   { title: "Contacto", href: "/contacto" },
   { title: "Inicio", href: "/" },
