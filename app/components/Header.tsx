@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { href: "/sobre-la-autora", label: "Sobre la autora" },
   { href: "/clases-yoga", label: "Clases de yoga" },
   { href: "/carrito", label: "Carrito" },
+  { href: "/contacto", label: "Contacto" },
 ];
 
 export default function Header() {
@@ -36,13 +37,13 @@ export default function Header() {
               {label}
             </Link>
           ))}
-          <button
-            type="button"
+          <Link
+            href="/buscar"
             className="rounded p-1.5 hover:bg-white/10"
             aria-label="Buscar"
           >
             <Search className="h-5 w-5" strokeWidth={2} />
-          </button>
+          </Link>
           <button
             type="button"
             className="rounded p-1.5 hover:bg-white/10"
@@ -110,12 +111,13 @@ export default function Header() {
             </Link>
           ))}
           <div className="mt-2 flex gap-2 border-t border-white/20 pt-2">
-            <button
-              type="button"
+            <Link
+              href="/buscar"
+              onClick={() => setMenuOpen(false)}
               className="flex flex-1 items-center justify-center gap-2 rounded bg-white/10 py-2 text-sm"
             >
               <Search className="h-4 w-4" /> Buscar
-            </button>
+            </Link>
             <button
               type="button"
               className="flex flex-1 items-center justify-center gap-2 rounded bg-white/10 py-2 text-sm"
