@@ -1,7 +1,14 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { MessageCircle } from "lucide-react";
 import { getProductById, formatPrice, PRODUCTS } from "@/lib/ebooks-config";
 import AddToCartButton from "@/app/components/AddToCartButton";
+
+const WHATSAPP_NUMBER = "5493518153347";
+function whatsAppEnvioUrl(bookTitle: string) {
+  const text = `Hola, quisiera solicitar envío a domicilio del libro "${bookTitle}".`;
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+}
 
 export function generateStaticParams() {
   return PRODUCTS.map((p) => ({ id: p.id }));
@@ -80,12 +87,16 @@ export default async function EbookDetailPage({ params }: PageProps) {
                   label="Añadir al carrito"
                 />
               ) : (
-                <Link
-                  href="/carrito?envio=mancia"
-                  className="inline-block w-fit rounded-lg border-2 border-gray-700 bg-transparent px-6 py-3 text-center text-base font-semibold text-gray-800 transition hover:bg-gray-700 hover:text-white"
+                <a
+                  href={whatsAppEnvioUrl(product.title)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group/whatsapp inline-flex items-center gap-2 rounded-xl border-2 border-green-600 bg-white/80 px-6 py-3 text-base font-semibold text-gray-800 shadow-sm transition hover:border-green-700 hover:bg-green-600 hover:text-white hover:shadow-md"
+                  aria-label="Solicitar envío a domicilio por WhatsApp"
                 >
-                  Solicitar envío a domicilio
-                </Link>
+                  <MessageCircle className="h-5 w-5 shrink-0 text-green-600 group-hover/whatsapp:text-white" aria-hidden />
+                  <span className="whitespace-nowrap">Solicitar envío a domicilio</span>
+                </a>
               )}
             </div>
           </div>

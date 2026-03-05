@@ -1,8 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { MessageCircle } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
 import { formatPrice, type ProductItem } from "@/lib/ebooks-config";
+
+const WHATSAPP_NUMBER = "5493518153347";
+const WHATSAPP_ENVIO_TEXT = "Hola, quisiera solicitar envío a domicilio.";
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_ENVIO_TEXT)}`;
 
 interface EbookCardProps {
   libro: ProductItem;
@@ -46,12 +51,16 @@ export default function EbookCard({ libro }: EbookCardProps) {
             Añadir al carrito
           </button>
         ) : (
-          <Link
-            href="/carrito?envio=mancia"
-            className="mt-2 block w-full rounded-lg border-2 border-gray-700 bg-transparent py-2 text-center text-sm font-semibold text-gray-800 transition hover:bg-gray-700 hover:text-white"
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group/whatsapp mt-2 flex min-h-[2.75rem] items-center justify-center gap-2 rounded-xl border-2 border-green-600 bg-white/80 px-3 py-2.5 text-center text-xs font-semibold leading-tight text-gray-800 shadow-sm transition hover:border-green-700 hover:bg-green-600 hover:text-white hover:shadow-md sm:text-sm"
+            aria-label="Solicitar envío a domicilio por WhatsApp"
           >
-            Solicitar envío a domicilio
-          </Link>
+            <MessageCircle className="h-4 w-4 shrink-0 text-green-600 group-hover/whatsapp:text-white" aria-hidden />
+            <span className="break-words">Solicitar envío a domicilio</span>
+          </a>
         )}
       </div>
     </div>
