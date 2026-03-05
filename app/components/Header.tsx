@@ -25,8 +25,11 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-brand-header text-white">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-6">
-        <Link href="/" className="shrink-0 font-script text-3xl font-normal tracking-tight md:text-4xl lg:text-5xl xl:text-6xl">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 md:gap-6 md:px-6">
+        <Link
+          href="/"
+          className="shrink-0 font-script text-2xl font-normal tracking-tight md:text-3xl lg:text-4xl xl:text-5xl"
+        >
           yoga vida plena libros
         </Link>
 
@@ -161,13 +164,13 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile menu panel */}
+      {/* Mobile menu panel: altura suficiente y scroll si hace falta */}
       <div
         className={`overflow-hidden transition-all duration-200 ease-out md:hidden ${
-          menuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+          menuOpen ? "max-h-[85vh] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <nav className="flex flex-col gap-1 border-t border-white/20 bg-brand-header px-4 pb-4 pt-2">
+        <nav className="flex flex-col gap-1 border-t border-white/20 bg-brand-header px-4 pb-6 pt-2 max-h-[85vh] overflow-y-auto overscroll-contain">
           {NAV_LINKS.map(({ href, label }) => (
             <Link
               key={href}
