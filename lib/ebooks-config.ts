@@ -59,7 +59,7 @@ export const PRODUCTS: ProductItem[] = [
     id: EBOOK_IDS.MANUAL_TOMO_2,
     title: "Manual de Yoga en una Vida Plena · Tomo II",
     description:
-      "Segundo tomo del Manual de Yoga en una Vida Plena. Profundización en asanas y prácticas. Por Claudia Peresson.",
+      "Técnicas energéticas y avanzadas del yoga. Saludos y posturas que benefician al aparato respiratorio y cardíaco. Por Claudia Peresson.",
     price: 20_000,
     digital: true,
     coverSrc: "/images/libros/manual_de_yoga_tomo_2.png",
@@ -69,7 +69,7 @@ export const PRODUCTS: ProductItem[] = [
     id: EBOOK_IDS.MANUAL_TOMO_3,
     title: "Manual de Yoga en una Vida Plena · Tomo III",
     description:
-      "Tercer tomo del Manual de Yoga en una Vida Plena. Avanzado en posturas y secuencias. Por Claudia Peresson.",
+      "El yoga mental. Comprensión psicológica y técnicas para el abordaje de la meditación. Técnicas aplicadas a funciones cognitivas, conscientes y subconscientes. Por Claudia Peresson.",
     price: 20_000,
     digital: true,
     coverSrc: "/images/libros/manual_de_yoga_tomo_3.png",
@@ -79,7 +79,7 @@ export const PRODUCTS: ProductItem[] = [
     id: EBOOK_IDS.MANUAL_TOMO_4,
     title: "Manual de Yoga en una Vida Plena · Tomo IV",
     description:
-      "Cuarto tomo del Manual de Yoga en una Vida Plena. Cierre de la serie con prácticas integradoras. Por Claudia Peresson.",
+      "Yoga terapéutico. Fundamentos físicos, mentales y energéticos de cada patología. Series de posturas, técnicas y visualizaciones para cada trastorno. Por Claudia Peresson.",
     price: 20_000,
     digital: true,
     coverSrc: "/images/libros/manual_de_yoga_tomo_4.png",
@@ -89,7 +89,7 @@ export const PRODUCTS: ProductItem[] = [
     id: EBOOK_IDS.TU_MANCIA,
     title: "Tu mancia tu sadhana",
     description:
-      "Posturas de yoga para mancia y práctica personal. Libro físico disponible solo con envío a domicilio. Por Claudia Peresson.",
+      "Posturas de yoga para mancia y práctica personal. Libro físico. Entrega a acordar con el vendedor (consultar por WhatsApp: 3518153347). Por Claudia Peresson.",
     price: 38_000,
     digital: false,
     coverSrc: "/images/libros/mancia_tapa.png",
