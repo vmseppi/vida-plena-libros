@@ -33,6 +33,22 @@ export default function ClasesYogaPage() {
           27 DE ABRIL 1968 - CÓRDOBA
         </p>
 
+        <div className="mt-8">
+          <h2 className="font-serif-heading mb-3 text-xl font-semibold text-gray-900">
+            Video
+          </h2>
+          <div className="overflow-hidden rounded-lg border-2 border-gray-300/50 bg-black/5">
+            <video
+              controls
+              className="w-full"
+              preload="metadata"
+            >
+              <source src="/videos/clasesdeyoga.mp4" type="video/mp4" />
+              Tu navegador no soporta la reproducción de video.
+            </video>
+          </div>
+        </div>
+
         <div className="masonry-clases mt-10 columns-2 gap-x-3 lg:columns-3 lg:gap-x-5">
           {CLASES_IMAGES.map((item) => (
             <div key={item.src} className="masonry-clases-item break-inside-avoid mb-3 lg:mb-5">

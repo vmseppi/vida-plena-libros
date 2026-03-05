@@ -67,6 +67,22 @@ export default function InstructoradoYogaPage() {
             <p className="font-semibold text-gray-900">📱 WhatsApp: 3518153347</p>
             <p className="mt-1 text-sm text-gray-700">Consultas e inscripción</p>
           </div>
+
+          <div className="mt-8">
+            <h2 className="font-serif-heading mb-3 text-xl font-semibold text-gray-900">
+              Video
+            </h2>
+            <div className="overflow-hidden rounded-lg border-2 border-gray-300/50 bg-black/5">
+              <video
+                controls
+                className="w-full"
+                preload="metadata"
+              >
+                <source src="/videos/VIDEO_INSTRUCTORADO_YOGA_2021_1080P.mp4" type="video/mp4" />
+                Tu navegador no soporta la reproducción de video.
+              </video>
+            </div>
+          </div>
         </section>
         {INSTRUCTORADO_IMAGES.length > 0 && (
           <div className="masonry-clases mt-10 columns-2 gap-x-3 lg:columns-3 lg:gap-x-5">
