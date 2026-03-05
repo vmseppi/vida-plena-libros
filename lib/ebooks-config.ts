@@ -10,7 +10,6 @@ export const EBOOK_IDS = {
   MANUAL_TOMO_3: "manual-tomo-3",
   MANUAL_TOMO_4: "manual-tomo-4",
   TU_MANCIA: "tu-mancia",
-  PRUEBA_PRODUCCION: "prueba-produccion",
 } as const;
 
 export type EbookId = (typeof EBOOK_IDS)[keyof typeof EBOOK_IDS];
@@ -94,16 +93,6 @@ export const PRODUCTS: ProductItem[] = [
     digital: false,
     coverSrc: "/images/libros/mancia_tapa.png",
     videoSrc: "/videos/Tu mancia tu sadhana_tel.mp4",
-  },
-  {
-    id: EBOOK_IDS.PRUEBA_PRODUCCION,
-    title: "Prueba de pago (Vercel)",
-    description:
-      "Artículo de prueba para validar el checkout en producción. Precio mínimo para probar con tarjeta real.",
-    price: 0.01,
-    digital: true,
-    coverSrc: "/images/libros/guia_de_meditacion_raja_yoga.png",
-    pdfFile: "prueba-produccion.pdf",
   },
 ];
 
