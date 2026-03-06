@@ -3,15 +3,15 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="min-h-screen">
-      {/* Sección Hero - fondo #DF4233 */}
-      <section className="bg-brand-header text-white">
+      {/* Sección Hero */}
+      <section className="bg-brand-peach text-gray-900">
         <div className="mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-16 lg:py-20">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
             <div className="flex flex-col gap-4 lg:max-w-xl">
               <h1 className="font-script text-4xl font-normal tracking-tight md:text-5xl lg:text-6xl">
                 Yoga vida plena libros
               </h1>
-              <p className="font-serif-body text-lg text-white/95 md:text-xl">
+              <p className="font-serif-body text-lg text-gray-700 md:text-xl">
                 Descubre los manuales y la guía de meditación Raja Yoga para
                 llevar la práctica a tu día a día.
               </p>
@@ -23,7 +23,7 @@ export default function Home() {
               </Link>
             </div>
             <div className="flex shrink-0 justify-center lg:justify-end">
-              <div className="h-64 w-48 overflow-hidden rounded-lg border-2 border-white/30 shadow-lg md:h-80 md:w-56 lg:h-96 lg:w-64">
+              <div className="h-64 w-48 overflow-hidden rounded-lg border-2 border-gray-300/50 shadow-lg md:h-80 md:w-56 lg:h-96 lg:w-64">
                 <img
                   src="/images/libros/guia_de_meditacion_raja_yoga.png"
                   alt="Guía de Meditación Raja Yoga - Claudia Peresson"
@@ -99,8 +99,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Sección inferior - sobre el autor, fondo naranja tostado */}
-      <section className="bg-brand-toast text-gray-900">
+      {/* Sección inferior - Acerca de la autora */}
+      <section className="bg-brand-peach text-gray-900">
         <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16 lg:py-20">
           <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
             <div className="order-2 lg:order-1 lg:flex-1">

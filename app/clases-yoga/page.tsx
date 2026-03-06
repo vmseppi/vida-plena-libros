@@ -18,7 +18,7 @@ const CLASES_IMAGES = [
 
 export default function ClasesYogaPage() {
   return (
-    <main className="min-h-screen bg-brand-toast">
+    <main className="min-h-screen bg-brand-peach">
       <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
         <h1 className="font-serif-heading text-3xl font-bold text-gray-900 md:text-4xl">
           Clases de yoga
