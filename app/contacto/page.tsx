@@ -17,7 +17,7 @@ export default function ContactoPage() {
             <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-brand-header" />
             <span>
               <strong className="block text-gray-900">Dirección</strong>
-              27 de abril 1868, Córdoba, Argentina
+              27 de abril 1968, Córdoba, Argentina
             </span>
           </li>
           <li className="flex items-start gap-3">
